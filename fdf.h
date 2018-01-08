@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:04:48 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/04 19:31:15 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/09 00:32:42 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 # define FDF_H
 
 #include <stdio.h>
+#include <math.h>
+#include "mlx.h"
 #include "libft/libft.h"
 #include "libft/printf/ft_printf.h"
+
+# define HIGH	1000
+# define WIDTH	1000
+# define SIZE	20
+# define PI 3.14159265358979323846
 
 typedef struct	s_mlx
 {
@@ -32,6 +39,9 @@ typedef struct	s_coord
 	double	z;
 }				t_coord;
 
-int		read_coordinate(int fd, char *av);
+t_coord	**read_coordinate(int fd, char *av, t_coord **arr, t_mlx *data);
 int		close_window(int key, t_mlx *new);
+void	ft_draw_line(t_mlx *new, double x0, double x1, double y0, double y1);
+void	ft_draw_fdf(t_coord **arr, t_mlx *data);
+void	ft_conversion_xyz(t_coord **arr, t_mlx *data);
 # endif
