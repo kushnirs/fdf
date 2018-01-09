@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 17:42:31 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/09 14:58:05 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/09 23:58:13 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,7 @@ char			*ft_strrev(char *str);
 void			ft_putnstr(char const *s, size_t n);
 size_t			ft_ucharlen(int c);
 int				get_next_line(const int fd, char **line);
+double			ft_pow(double i, double a);
+long			ft_hex_to_dec(char *str);
 
 #endif

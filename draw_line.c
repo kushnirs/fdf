@@ -3,38 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 21:58:17 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/09 15:29:50 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/10 00:49:32 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_draw_line(t_mlx *data, double x0, double x1, double y0, double y1)
+void	ft_draw_line(t_mlx *data, t_coord	*p0, t_coord	*p1)
 {
 	double	t;
 	double	k;
 	double	n_x;
 	double	n_y;
 
+	printf("%ld\n", p0->color);
 	t = 0;
-	k = 1.0 / sqrt((pow((x1 - x0), 2) + pow((y1 - y0), 2)));
+	k = 1.0 / sqrt((pow((p1->x - p0->x), 2) + pow((p1->y - p0->y), 2)));
 	t = 0;
 	while (t <= 1)
 	{
-		n_y = y0 + t * (y1 - y0);
-		n_x = x0 + t * (x1 - x0);
-		mlx_pixel_put(data->mlx, data->win, n_x, n_y, 0x00FFFFFF);
+		n_y = p0->y + t * (p1->y - p0->y);
+		n_x = p0->x + t * (p1->x - p0->x);
+		mlx_pixel_put(data->mlx, data->win, n_x, n_y, p0->color);
 		t += k;
 	}
 }
 
 void	ft_draw_fdf(t_mlx *data)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	t_coord	p[3];
 	t_coord **arr;
 
 	arr = data->arr;
@@ -44,10 +46,17 @@ void	ft_draw_fdf(t_mlx *data)
 		y = -1;
 		while (++y < data->column)
 		{
+			p[0]= arr[x][y];
 			if (y + 1 < data->column)
-				ft_draw_line(data, arr[x][y].x, arr[x][y + 1].x, arr[x][y].y, arr[x][y + 1].y);
+			{
+				p[2] = arr[x][y + 1];
+				ft_draw_line(data, &p[0], &p[2]);
+			}
 			if (x + 1 < data->row)
-				ft_draw_line(data, arr[x][y].x, arr[x + 1][y].x, arr[x][y].y, arr[x + 1][y].y);
+			{
+				p[1] = arr[x + 1][y];
+				ft_draw_line(data, &p[0], &p[1]);
+			}
 		}
 	}
 }

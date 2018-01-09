@@ -6,23 +6,11 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 03:20:28 by sergee            #+#    #+#             */
-/*   Updated: 2017/12/27 21:31:27 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/09 23:50:30 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static double	ft_pow(double i, double a)
-{
-	double res;
-
-	if (a <= 0)
-		return (1);
-	res = i;
-	while (a-- > 1)
-		res *= i;
-	return (res);
-}
 
 void			ft_f_nbr(double n, int i)
 {

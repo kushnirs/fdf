@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:04:48 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/09 15:01:28 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/10 00:36:27 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ typedef struct	s_coord
 	double	x;
 	double	y;
 	double	z;
+	long	color;
 }				t_coord;
 
 typedef struct	s_mlx
 {
 	void	*mlx;
 	void	*win;
+	int		size;
 	int		row;
 	int		column;
 	t_coord	start;
@@ -47,7 +49,7 @@ typedef struct	s_mlx
 }				t_mlx;
 
 t_coord	**read_coordinate(int fd, char *av, t_coord **arr, t_mlx *data);
-void	ft_draw_line(t_mlx *new, double x0, double x1, double y0, double y1);
+void	ft_draw_line(t_mlx *data, t_coord	*p0, t_coord	*p1);
 void	ft_draw_fdf(t_mlx *data);
 void	ft_conversion_xyz(t_mlx *data);
 int		key_action(int key, t_mlx *new);

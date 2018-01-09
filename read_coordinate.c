@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_coordinate.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 15:55:45 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/09 15:28:34 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/10 00:47:13 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static void	parse_coordinate(int y, t_mlx *data, char **coord, t_coord **arr)
 		arr[y][x].x = x * SIZE + data->start.x;
 		arr[y][x].y = y * SIZE + data->start.y;
 		arr[y][x].z = ft_atoi(coord[x]) * SIZE;
+		arr[y][x].color = ft_hex_to_dec(ft_strchr(coord[x], ','));
+		!arr[y][x].color ? arr[y][x].color = 0xFFFFFF : 0;
 	}
 }
 

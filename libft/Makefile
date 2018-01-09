@@ -26,7 +26,8 @@ SRC =  ft_putstr.c ft_strmapi.c ft_putstr_fd.c ft_strncat.c ft_atoi.c	\
 	printf/ft_addition.c printf/ft_apply_flags.c printf/ft_decnbr.c		\
 	printf/ft_doublenbr.c printf/ft_eg_nbr.c printf/ft_hexnbr.c			\
 	printf/ft_octnbr.c	printf/ft_printf.c ft_strpcmp.c					\
-	printf/ft_decnbrlen.c printf/ft_binnbr.c get_next_line.c
+	printf/ft_decnbrlen.c printf/ft_binnbr.c get_next_line.c ft_pow.c	\
+	ft_hex_to_dec.c
 	
 OBJ = $(SRC:.c=.o)
 
