@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:04:48 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/09 00:32:42 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/09 11:47:08 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@
 
 # define HIGH	1000
 # define WIDTH	1000
+# define UP		126
+# define DOWN	125
+# define LEFT	123
+# define RIGHT	124
 # define SIZE	20
-# define PI 3.14159265358979323846
+# define ESC	53
+# define PI		3.14159265358979323846
 
 typedef struct	s_mlx
 {
@@ -40,8 +45,10 @@ typedef struct	s_coord
 }				t_coord;
 
 t_coord	**read_coordinate(int fd, char *av, t_coord **arr, t_mlx *data);
-int		close_window(int key, t_mlx *new);
 void	ft_draw_line(t_mlx *new, double x0, double x1, double y0, double y1);
 void	ft_draw_fdf(t_coord **arr, t_mlx *data);
 void	ft_conversion_xyz(t_coord **arr, t_mlx *data);
+int		key_action(int key, t_mlx *new);
+int		ft_up_down(int key, t_mlx *data);
+int		ft_left_right(int key, t_mlx *data);
 # endif
