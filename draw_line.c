@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 21:58:17 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/09 11:55:25 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/09 15:29:50 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,53 +21,47 @@ void	ft_draw_line(t_mlx *data, double x0, double x1, double y0, double y1)
 
 	t = 0;
 	k = 1.0 / sqrt((pow((x1 - x0), 2) + pow((y1 - y0), 2)));
-	for (int k = 0; k < 1000; k++)
-		mlx_pixel_put(data->mlx, data->win, 500, k, 0x00FFFFFF);
-	for (int k = 0; k < 1000; k++)
-		mlx_pixel_put(data->mlx, data->win, k, 500, 0x00FFFFFF);
 	t = 0;
 	while (t <= 1)
 	{
 		n_y = y0 + t * (y1 - y0);
 		n_x = x0 + t * (x1 - x0);
-		mlx_pixel_put(data->mlx, data->win, n_x, n_y, 0x00FFFFF);
+		mlx_pixel_put(data->mlx, data->win, n_x, n_y, 0x00FFFFFF);
 		t += k;
 	}
 }
 
-void	ft_draw_fdf(t_coord **arr, t_mlx *data)
+void	ft_draw_fdf(t_mlx *data)
 {
 	int	x;
 	int	y;
+	t_coord **arr;
 
+	arr = data->arr;
 	x = -1;
-	while (++x < data->row - 1)
+	while (++x < data->row)
 	{
 		y = -1;
-		while (++y < data->column - 1)
+		while (++y < data->column)
 		{
-			ft_draw_line(data, arr[x][y].x, arr[x][y + 1].x, arr[x][y].y, arr[x][y + 1].y);
-			ft_draw_line(data, arr[x][y].x, arr[x + 1][y].x, arr[x][y].y, arr[x + 1][y].y);
+			if (y + 1 < data->column)
+				ft_draw_line(data, arr[x][y].x, arr[x][y + 1].x, arr[x][y].y, arr[x][y + 1].y);
+			if (x + 1 < data->row)
+				ft_draw_line(data, arr[x][y].x, arr[x + 1][y].x, arr[x][y].y, arr[x + 1][y].y);
 		}
 	}
-	x = data->row - 1;
-	y = -1;
-	while (++y < data->column - 1)
-		ft_draw_line(data, arr[x][y].x, arr[x][y + 1].x, arr[x][y].y, arr[x][y + 1].y);
-	x = -1;
-	y = data->column - 1;
-	while (++x < data->row - 1)
-		ft_draw_line(data, arr[x][y].x, arr[x + 1][y].x, arr[x][y].y, arr[x + 1][y].y);
 }
 
-void	ft_conversion_xyz(t_coord **arr, t_mlx *data)
+void	ft_conversion_xyz(t_mlx *data)
 {
 	int	x;
 	int	y;
 	int	c_x;
 	int	c_y;
 
-	c_x = (WIDTH / 2 - data->row * SIZE / 2);
+	t_coord **arr;
+	arr = data->arr;
+	c_x = WIDTH / 2;
 	c_y = HIGH / 2;
 	x = -1;
 	while (++x < data->row)
@@ -83,7 +77,6 @@ void	ft_conversion_xyz(t_coord **arr, t_mlx *data)
 			x_ = arr[x][y].x;
 			arr[x][y].x =  c_x + arr[x][y].x * cos(PI * -60 / 180) - arr[x][y].y * sin(PI * -60 / 180);
 			arr[x][y].y =  c_y + x_ * sin(PI * -60 / 180) + arr[x][y].y * cos(PI * -60 / 180);
-
 		}
 	}
 }

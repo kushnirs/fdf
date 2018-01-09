@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:04:48 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/09 11:47:08 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/09 15:01:28 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,6 @@
 # define ESC	53
 # define PI		3.14159265358979323846
 
-typedef struct	s_mlx
-{
-	void	*mlx;
-	void	*win;
-	int		row;
-	int		column;
-}				t_mlx;
-
 typedef struct	s_coord
 {
 	double	x;
@@ -44,11 +36,22 @@ typedef struct	s_coord
 	double	z;
 }				t_coord;
 
+typedef struct	s_mlx
+{
+	void	*mlx;
+	void	*win;
+	int		row;
+	int		column;
+	t_coord	start;
+	t_coord	**arr;
+}				t_mlx;
+
 t_coord	**read_coordinate(int fd, char *av, t_coord **arr, t_mlx *data);
 void	ft_draw_line(t_mlx *new, double x0, double x1, double y0, double y1);
-void	ft_draw_fdf(t_coord **arr, t_mlx *data);
-void	ft_conversion_xyz(t_coord **arr, t_mlx *data);
+void	ft_draw_fdf(t_mlx *data);
+void	ft_conversion_xyz(t_mlx *data);
 int		key_action(int key, t_mlx *new);
 int		ft_up_down(int key, t_mlx *data);
 int		ft_left_right(int key, t_mlx *data);
+int		close_window(t_mlx *data);
 # endif

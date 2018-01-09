@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 14:13:45 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/09 11:48:14 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/09 15:17:22 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,27 @@ int main(int ar, char **av)
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		exit(ft_printf("No file %s\n", av[1]));
 	arr = NULL;
-	arr = read_coordinate(fd, av[1], arr, &data);
+	data.arr = read_coordinate(fd, av[1], arr, &data);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIDTH, HIGH, "fdf");
-	ft_conversion_xyz(arr, &data);
-	ft_draw_fdf(arr, &data);
-	// for(int x = 0; x<19; x++)
+	ft_conversion_xyz(&data);
+	ft_draw_fdf(&data);
+	// for (int k = 0; k < 1000; k++)
+	// 	mlx_pixel_put(data.mlx, data.win, 500, k, 0x00FFFFFF);
+	// for (int k = 0; k < 1000; k++)
+	// 	mlx_pixel_put(data.mlx, data.win, k, 500, 0x00FFFFFF);
+	// for(int x = 0; x<11; x++)
 	// {
-	// 	for (int y = 0; y<10; y++)
+	// 	for (int y = 0; y<19; y++)
 	// 	{
-	// 		// printf("|%.0f ", arr[x][y].x);
-	// 		// printf("%.0f ", arr[x][y].y);
-	// 		printf("|%3.0f|  ", arr[x][y].z);
+	// 		printf("|%.0f ", data.arr[x][y].x);
+	// 		// printf("%.0f ", data.arr[x][y].y);
+	// 		// printf("|%3.0f|  ", data.arr[x][y].z);
 	// 	}
 	// 	printf("\n");
 	// }
-	
 	mlx_key_hook(data.win, &key_action, &data);
+	mlx_hook(data.win, 17, 0, &close_window , &data);
 	mlx_loop(data.mlx);
 	return (0);
 }
