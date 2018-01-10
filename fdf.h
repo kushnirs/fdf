@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:04:48 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/10 11:37:23 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/10 18:50:03 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 
 # define HIGH	1000
 # define WIDTH	1000
+# define B_A	0
+# define B_W	13
+# define B_D	2
+# define B_S	1
 # define UP		126
 # define DOWN	125
 # define LEFT	123
@@ -37,6 +41,13 @@ typedef struct	s_coord
 	long	color;
 }				t_coord;
 
+typedef struct	s_rot
+{
+	double	rx;
+	double	ry;
+	double	rz;
+}				t_rot;
+
 typedef struct	s_mlx
 {
 	void	*mlx;
@@ -46,16 +57,18 @@ typedef struct	s_mlx
 	int		column;
 	int		move_x;
 	int		move_y;
+	t_rot	rot;
 	t_coord	start;
 	t_coord	**arr;
 }				t_mlx;
 
-t_coord	**read_coordinate(int fd, char *av, t_coord **arr, t_mlx *data);
+void	read_coordinate(int fd, char *av, t_mlx *data);
 void	ft_draw_line(t_mlx *data, t_coord *p0, t_coord *p1);
-void	ft_draw_fdf(t_mlx *data);
+void	ft_draw_fdf(t_mlx *data, t_coord **tmp);
 void	ft_conversion_xyz(t_mlx *data);
 int		key_action(int key, t_mlx *new);
 int		ft_up_down(int key, t_mlx *data);
 int		ft_left_right(int key, t_mlx *data);
+int 	rotation(t_mlx *data);
 int		close_window(t_mlx *data);
 # endif

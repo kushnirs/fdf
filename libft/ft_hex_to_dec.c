@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hex_to_dec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 23:37:27 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/10 01:05:07 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/10 15:06:09 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ long	ft_hex_to_dec(char *str)
 
 	if (!str)
 		return (0);
-	power = ft_strlen(str) - 4;
+	power = ft_strlen(str) - 3;
 	num = 0;
-	str += 3;
+	str += 2;
 	while (*str)
 	{
 		if (*str >= '0' && *str <= '9')
