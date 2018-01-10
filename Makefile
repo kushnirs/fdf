@@ -6,13 +6,13 @@
 #    By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 11:17:10 by skushnir          #+#    #+#              #
-#    Updated: 2018/01/09 11:34:51 by skushnir         ###   ########.fr        #
+#    Updated: 2018/01/10 21:12:48 by skushnir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC =  fdf.c read_coordinate.c ft_keys.c action.c draw_line.c
+SRC =  fdf.c read_coordinate.c draw_line.c
 
 HDR = fdf.h minilibx/mlx.h
 

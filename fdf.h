@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:04:48 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/10 18:50:03 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/10 20:58:06 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ typedef struct	s_mlx
 }				t_mlx;
 
 void	read_coordinate(int fd, char *av, t_mlx *data);
-void	ft_draw_line(t_mlx *data, t_coord *p0, t_coord *p1);
-void	ft_draw_fdf(t_mlx *data, t_coord **tmp);
-void	ft_conversion_xyz(t_mlx *data);
+void	ft_draw_line(t_mlx *data, t_coord p0, t_coord p1);
+void	ft_draw_fdf(t_mlx *data);
+t_coord	ft_conversion_xyz(t_mlx *data , t_coord rot);
 int		key_action(int key, t_mlx *new);
 int		ft_up_down(int key, t_mlx *data);
 int		ft_left_right(int key, t_mlx *data);
