@@ -6,21 +6,19 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 21:58:17 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/10 00:49:32 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/10 12:00:28 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_draw_line(t_mlx *data, t_coord	*p0, t_coord	*p1)
+void	ft_draw_line(t_mlx *data, t_coord *p0, t_coord *p1)
 {
 	double	t;
 	double	k;
 	double	n_x;
 	double	n_y;
 
-	printf("%ld\n", p0->color);
-	t = 0;
 	k = 1.0 / sqrt((pow((p1->x - p0->x), 2) + pow((p1->y - p0->y), 2)));
 	t = 0;
 	while (t <= 1)
@@ -63,29 +61,25 @@ void	ft_draw_fdf(t_mlx *data)
 
 void	ft_conversion_xyz(t_mlx *data)
 {
-	int	x;
-	int	y;
-	int	c_x;
-	int	c_y;
+	int		x;
+	int		y;
+	double	x_;
 
 	t_coord **arr;
 	arr = data->arr;
-	c_x = WIDTH / 2;
-	c_y = HIGH / 2;
 	x = -1;
 	while (++x < data->row)
 	{
 		y = -1;
 		while (++y < data->column)
 		{
-			double x_ = arr[x][y].x;
-
+			x_ = arr[x][y].x;
 			arr[x][y].x = arr[x][y].x * cos(PI * -45 / 180) - arr[x][y].z * sin(PI * -45 / 180);
 			arr[x][y].y = arr[x][y].y * cos(PI * 45 / 180) -
 			(arr[x][y].z * cos(PI * -45 / 180) + x_ * sin(PI * -45 / 180)) * sin(PI * 45 / 180);
 			x_ = arr[x][y].x;
-			arr[x][y].x =  c_x + arr[x][y].x * cos(PI * -60 / 180) - arr[x][y].y * sin(PI * -60 / 180);
-			arr[x][y].y =  c_y + x_ * sin(PI * -60 / 180) + arr[x][y].y * cos(PI * -60 / 180);
+			arr[x][y].x =  WIDTH / 2 + arr[x][y].x * cos(PI * -60 / 180) - arr[x][y].y * sin(PI * -60 / 180);
+			arr[x][y].y =  HIGH / 2 + x_ * sin(PI * -60 / 180) + arr[x][y].y * cos(PI * -60 / 180);
 		}
 	}
 }

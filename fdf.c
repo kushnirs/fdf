@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 14:13:45 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/09 15:17:22 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/10 11:40:08 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int main(int ar, char **av)
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		exit(ft_printf("No file %s\n", av[1]));
 	arr = NULL;
+	data.move_x = 0;
+	data.move_y = 0;
 	data.arr = read_coordinate(fd, av[1], arr, &data);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIDTH, HIGH, "fdf");

@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:04:48 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/10 00:36:27 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/10 11:37:23 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 #include <math.h>
-#include "mlx.h"
+#include "minilibx/mlx.h"
 #include "libft/libft.h"
 #include "libft/printf/ft_printf.h"
 
@@ -44,12 +44,14 @@ typedef struct	s_mlx
 	int		size;
 	int		row;
 	int		column;
+	int		move_x;
+	int		move_y;
 	t_coord	start;
 	t_coord	**arr;
 }				t_mlx;
 
 t_coord	**read_coordinate(int fd, char *av, t_coord **arr, t_mlx *data);
-void	ft_draw_line(t_mlx *data, t_coord	*p0, t_coord	*p1);
+void	ft_draw_line(t_mlx *data, t_coord *p0, t_coord *p1);
 void	ft_draw_fdf(t_mlx *data);
 void	ft_conversion_xyz(t_mlx *data);
 int		key_action(int key, t_mlx *new);
