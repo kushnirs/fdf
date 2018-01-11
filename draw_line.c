@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 21:58:17 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/10 21:17:15 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/11 15:12:37 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ static unsigned int	parse_color(int c1, int c2, double t)
 	unsigned char dg;
 	unsigned char db;
 
-	dr = (1 - t) * (double)(c1 / 0x10000 % 256) + t *  (double)(c2 / 0x10000 % 256);
-	dg = (1 - t) * (double)(c1 / 0x100 % 256) + t *  (double)(c2 / 0x100 % 256);
+	dr = (1 - t) * (double)(c1 / 0x10000 % 256) + t * (double)(c2 / 0x10000 % 256);
+	dg = (1 - t) * (double)(c1 / 0x100 % 256) + t * (double)(c2 / 0x100 % 256);
 	db = (1 - t) * (double)(c1 % 256) + t * (double)(c2 % 256);
-
 	return (dr * 0x10000 + dg * 0x100 + db);
 }
 
@@ -50,6 +49,8 @@ void	ft_draw_fdf(t_mlx *data)
 	int		y;
 	t_coord **arr;
 
+	data->start.x = data->column / 2 * (-data->size);
+	data->start.y = data->row / 2 * (-data->size);
 	arr = data->arr;
 	x = -1;
 	while (++x < data->row)
@@ -67,18 +68,27 @@ void	ft_draw_fdf(t_mlx *data)
 	}
 }
 
-t_coord	ft_conversion_xyz(t_mlx *data , t_coord rot)
+t_coord	ft_conversion_xyz(t_mlx *data, t_coord rot)
 {
 	t_coord	p[3];
 
+	rot.x = rot.x * data->size + data->start.x;
+	rot.y = rot.y * data->size + data->start.y;
+	rot.z = rot.z * data->size;
 	p[0].x = rot.x;
-	p[0].y = rot.y * cos(PI * data->rot.rx / 180) + rot.z * sin(PI * data->rot.rx / 180);
-	p[0].z = rot.z * cos(PI * data->rot.rx / 180) - rot.y * sin(PI * data->rot.rx / 180);
-	p[1].x = p[0].x * cos(PI * data->rot.ry / 180) + p[0].z * sin(PI * data->rot.ry / 180);
+	p[0].y = rot.y * cos(PI * data->rot.rx / 180) + rot.z *
+			sin(PI * data->rot.rx / 180);
+	p[0].z = rot.z * cos(PI * data->rot.rx / 180) - rot.y *
+			sin(PI * data->rot.rx / 180);
+	p[1].x = p[0].x * cos(PI * data->rot.ry / 180) + p[0].z *
+			sin(PI * data->rot.ry / 180);
 	p[1].y = p[0].y;
-	p[1].z = p[0].z * cos(PI * data->rot.ry / 180) - p[0].x * sin(PI * data->rot.ry / 180);
-	p[2].x = WIDTH / 2 + p[1].x * cos(PI * data->rot.rz / 180) - p[1].y * sin(PI * data->rot.rz / 180);
-	p[2].y = HIGH / 2 + p[1].x * sin(PI * data->rot.rz / 180) + p[1].y * cos(PI * data->rot.rz / 180);
+	p[1].z = p[0].z * cos(PI * data->rot.ry / 180) - p[0].x *
+			sin(PI * data->rot.ry / 180);
+	p[2].x = WIDTH / 2 + p[1].x * cos(PI * data->rot.rz / 180) - p[1].y *
+			sin(PI * data->rot.rz / 180);
+	p[2].y = HIGH / 2 + p[1].x * sin(PI * data->rot.rz / 180) + p[1].y *
+			cos(PI * data->rot.rz / 180);
 	p[2].z = p[1].z;
 	p[2].color = rot.color;
 	return (p[2]);
