@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 21:58:17 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/11 15:12:37 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/11 19:14:27 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static unsigned int	parse_color(int c1, int c2, double t)
 	unsigned char dg;
 	unsigned char db;
 
-	dr = (1 - t) * (double)(c1 / 0x10000 % 256) + t * (double)(c2 / 0x10000 % 256);
+	dr = (1 - t) * (double)(c1 / 0x10000 % 256) +
+		t * (double)(c2 / 0x10000 % 256);
 	dg = (1 - t) * (double)(c1 / 0x100 % 256) + t * (double)(c2 / 0x100 % 256);
 	db = (1 - t) * (double)(c1 % 256) + t * (double)(c2 % 256);
 	return (dr * 0x10000 + dg * 0x100 + db);
@@ -38,7 +39,8 @@ void	ft_draw_line(t_mlx *data, t_coord p0, t_coord p1)
 	{
 		n_y = p0.y + t * (p1.y - p0.y) - data->move_y;
 		n_x = p0.x + t * (p1.x - p0.x) - data->move_x;
-		mlx_pixel_put(data->mlx, data->win, n_x, n_y, parse_color(p0.color, p1.color, t));
+		mlx_pixel_put(data->mlx, data->win, n_x, n_y,
+					parse_color(p0.color, p1.color, t));
 		t += k;
 	}
 }

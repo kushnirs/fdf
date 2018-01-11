@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 14:13:45 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/11 17:21:35 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/11 20:38:30 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	close_window(t_mlx *data)
 
 int	mouse_action(int button, int x, int y, t_mlx *data)
 {
-	x= 0; y = 0;
+	x = 0;
+	y = 0;
 	button == M_UP ? data->size += 5 : 0;
 	button == M_DOWN ? data->size -= 5 : 0;
 	ft_draw_fdf(data);
@@ -39,8 +40,8 @@ int	key_action(int key, t_mlx *data)
 	key == B_W ? data->rot.rx -= 5 : 0;
 	key == B_D ? data->rot.ry += 5 : 0;
 	key == B_S ? data->rot.rx += 5 : 0;
-	key == B_PLUS ? data->size += 5 : 0;
-	key == B_MIN ? data->size -= 5 : 0;
+	key == B_PLUS ? data->size += 1 : 0;
+	key == B_MIN ? data->size -= 1 : 0;
 	ft_draw_fdf(data);
 	return (0);
 }
@@ -63,12 +64,12 @@ int	main(int ar, char **av)
 	data.rot.ry = 50;
 	data.rot.rz = 0;
 	read_coordinate(fd, av[1], &data);
-	// data.mlx = mlx_init();
-	// data.win = mlx_new_window(data.mlx, WIDTH, HIGH, "fdf");
-	// ft_draw_fdf(&data);
-	// mlx_mouse_hook(data.win, &mouse_action, &data);
-	// mlx_key_hook(data.win, &key_action, &data);
-	// mlx_hook(data.win, 17, 0, &close_window, &data);
-	// mlx_loop(data.mlx);
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, WIDTH, HIGH, "fdf");
+	ft_draw_fdf(&data);
+	mlx_mouse_hook(data.win, &mouse_action, &data);
+	mlx_key_hook(data.win, &key_action, &data);
+	mlx_hook(data.win, 17, 0, &close_window, &data);
+	mlx_loop(data.mlx);
 	return (0);
 }

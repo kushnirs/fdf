@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 15:55:45 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/11 17:27:29 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/11 20:41:21 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ static void	parse_coordinate(int c, t_mlx *data, char **coord)
 	int			x;
 	static int	y = 0;
 
-	!data->column ?	data->column = c : 0;
+	!data->column ? data->column = c : 0;
 	data->column != c ?
-		exit(write(1, "Found wrong line length. Exiting.\n", 34)) : 0;	
+		exit(write(1, "Found wrong line length. Exiting.\n", 34)) : 0;
 	data->arr[y] = (t_coord *)ft_memalloc(sizeof(t_coord) * (c + 1));
-	data->arr[data->column] = NULL;
 	x = -1;
 	while (coord[++x])
 	{
@@ -51,15 +50,14 @@ void		read_coordinate(int fd, char *av, t_mlx *data)
 	close(fd);
 	data->arr = (t_coord **)ft_memalloc(sizeof(t_coord *) * (data->row + 1));
 	data->arr[data->row] = NULL;
-	if ((fd = open(av, O_RDONLY)) == -1)
-		exit(ft_printf("No file %s\n", av));
-	// line = NULL;
-	printf("-------------------------------------\n");
+	(fd = open(av, O_RDONLY)) == -1 ? exit(ft_printf("No file %s\n", av)) : 0;
+	coord = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
 		coord = ft_strsplit(line, ' ');
-		i = -1;
-		while (coord[++i]);
+		i = 0;
+		while (coord[i])
+			i++;
 		parse_coordinate(i, data, coord);
 		ft_memdel((void **)&line);
 	}
