@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 14:13:45 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/11 20:38:30 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/11 21:17:07 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	key_action(int key, t_mlx *data)
 	key == B_W ? data->rot.rx -= 5 : 0;
 	key == B_D ? data->rot.ry += 5 : 0;
 	key == B_S ? data->rot.rx += 5 : 0;
-	key == B_PLUS ? data->size += 1 : 0;
-	key == B_MIN ? data->size -= 1 : 0;
+	key == B_PLUS ? data->size += 2 : 0;
+	key == B_MIN ? data->size -= 2 : 0;
 	ft_draw_fdf(data);
 	return (0);
 }
@@ -59,7 +59,7 @@ int	main(int ar, char **av)
 	data.column = 0;
 	data.move_x = 0;
 	data.move_y = 0;
-	data.size = 5;
+	data.size = 20;
 	data.rot.rx = -60;
 	data.rot.ry = 50;
 	data.rot.rz = 0;

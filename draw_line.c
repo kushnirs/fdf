@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 21:58:17 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/11 19:14:27 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/11 21:17:53 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_draw_line(t_mlx *data, t_coord p0, t_coord p1)
 	double	n_x;
 	double	n_y;
 
-	mlx_clear_window(data->mlx, data->win);
 	k = 1.0 / sqrt((pow((p1.x - p0.x), 2) + pow((p1.y - p0.y), 2)));
 	t = 0;
 	while (t <= 1)
@@ -51,6 +50,7 @@ void	ft_draw_fdf(t_mlx *data)
 	int		y;
 	t_coord **arr;
 
+	mlx_clear_window(data->mlx, data->win);
 	data->start.x = data->column / 2 * (-data->size);
 	data->start.y = data->row / 2 * (-data->size);
 	arr = data->arr;
@@ -76,7 +76,7 @@ t_coord	ft_conversion_xyz(t_mlx *data, t_coord rot)
 
 	rot.x = rot.x * data->size + data->start.x;
 	rot.y = rot.y * data->size + data->start.y;
-	rot.z = rot.z * data->size;
+	rot.z = rot.z * data->size / 10;
 	p[0].x = rot.x;
 	p[0].y = rot.y * cos(PI * data->rot.rx / 180) + rot.z *
 			sin(PI * data->rot.rx / 180);
