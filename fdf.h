@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:04:48 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/11 20:24:10 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/12 14:19:41 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdio.h>
 # include <math.h>
 # include "minilibx/mlx.h"
-# include "libft/libft.h"
 # include "libft/printf/ft_printf.h"
 
 # define HIGH	1000
@@ -25,6 +24,8 @@
 # define B_W	13
 # define B_D	2
 # define B_S	1
+# define B_Q	12
+# define B_E    14
 # define B_PLUS 69
 # define B_MIN  78
 # define M_UP   5
@@ -55,7 +56,12 @@ typedef struct	s_mlx
 {
 	void	*mlx;
 	void	*win;
-	int		size;
+	void	*image;
+	int		bpp;
+	int		sl;
+	int		endian;
+	t_ui	*data_adr;
+	double	size;
 	int		row;
 	int		column;
 	int		move_x;

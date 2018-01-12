@@ -6,7 +6,7 @@
 #    By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 11:17:10 by skushnir          #+#    #+#              #
-#    Updated: 2018/01/10 21:12:48 by skushnir         ###   ########.fr        #
+#    Updated: 2018/01/12 11:40:21 by skushnir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,10 @@ OBJ = $(SRC:.c=.o)
 all: $(SRC) $(SRC_PR) $(NAME)
 
 $(NAME): $(OBJ) $(HDR) $(LIB)
-	gcc -Wall -Wextra -Werror -o $(NAME) $(OBJ) $(LIB) -framework OpenGl -framework AppKit
+	gcc -Wall -Wextra -Werror -O3 -o $(NAME) $(OBJ) $(LIB) -framework OpenGl -framework AppKit
 
 .c.o:
-	@gcc  -Wall -Wextra -Werror -c $<
+	@gcc  -Wall -Wextra -Werror  -O3 -c $<
 
 clean:
 	@rm -f $(OBJ)
