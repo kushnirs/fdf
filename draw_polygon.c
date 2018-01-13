@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 02:11:20 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/13 02:58:28 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/13 03:00:48 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	ft_draw_polygon_triangle(t_mlx *data, t_coord p0,
 	p1.y < p0.y ? ft_swap(&p1, &p0) : 0;
 	p2.y < p0.y ? ft_swap(&p2, &p0) : 0;
 	p2.y < p1.y ? ft_swap(&p2, &p1) : 0;
-	k = 1.0 / sqrt((pow((p2.x - p0.x), 2) + pow((p2.y - p0.y), 2)));
+	k = 0.5 / sqrt((pow((p2.x - p0.x), 2) + pow((p2.y - p0.y), 2)));
 	t = 0;
 	while (t <= 1)
 	{
