@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sergee <sergee@student.42.fr>              +#+  +:+       +#+         #
+#    By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 11:17:10 by skushnir          #+#    #+#              #
-#    Updated: 2018/01/13 03:35:48 by sergee           ###   ########.fr        #
+#    Updated: 2018/01/13 11:21:16 by skushnir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,16 +20,16 @@ LIB = libft/libft.a minilibx/libmlx.a
 
 OBJ = $(SRC:.c=.o)
 
-all: $(SRC) $(SRC_PR) $(NAME)
+all:lib $(NAME)
 
-$(NAME): $(OBJ) $(HDR)
-	@make -C libft;
-	gcc -Wall -Wextra -Werror -O3 -o \
-	$(NAME) $(OBJ) $(LIB) -framework OpenGl -framework AppKit
+$(NAME): $(OBJ) $(HDR) $(LIB)
+	gcc -Wall -Wextra -Werror -O3 -o $(NAME) $(OBJ) $(LIB) -framework OpenGl -framework AppKit
 
 .c.o:
-	@gcc  -Wall -Wextra -Werror  -O3 -c $<
+	gcc  -Wall -Wextra -Werror  -O3 -c $<
 
+lib: 
+	make -C libft;
 clean:
 	@make -C libft clean;
 	@rm -f $(OBJ)

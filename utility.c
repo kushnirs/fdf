@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utility.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 21:58:17 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/13 03:16:20 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/13 11:08:19 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	close_window(t_mlx *data)
+int					close_window(t_mlx *data)
 {
 	data = NULL;
 	exit(0);
 	return (0);
 }
 
-int	mouse_action(int button, int x, int y, t_mlx *data)
+int					mouse_action(int button, int x, int y, t_mlx *data)
 {
 	x = 0;
 	y = 0;
@@ -29,7 +29,7 @@ int	mouse_action(int button, int x, int y, t_mlx *data)
 	return (0);
 }
 
-int	key_action(int key, t_mlx *data)
+int					key_action(int key, t_mlx *data)
 {
 	key == ESC ? exit(0) : 0;
 	key == UP ? data->move_y += 50 : 0;

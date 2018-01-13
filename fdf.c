@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 14:13:45 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/13 03:21:37 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/13 11:30:08 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		read_coordinate(int fd, char *av, t_mlx *data)
 	close(fd);
 }
 
-int	main(int ar, char **av)
+int			main(int ar, char **av)
 {
 	int		fd;
 	t_mlx	data;
@@ -89,4 +89,3 @@ int	main(int ar, char **av)
 	mlx_loop(data.mlx);
 	return (0);
 }
-
