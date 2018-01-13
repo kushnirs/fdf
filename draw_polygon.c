@@ -6,7 +6,7 @@
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 02:11:20 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/13 02:40:27 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/13 02:58:28 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ static void	ft_draw_polygon_triangle(t_mlx *data, t_coord p0,
 
 	p1.y < p0.y ? ft_swap(&p1, &p0) : 0;
 	p2.y < p0.y ? ft_swap(&p2, &p0) : 0;
-	p2.y < p2.y ? ft_swap(&p2, &p1) : 0;
+	p2.y < p1.y ? ft_swap(&p2, &p1) : 0;
 	k = 1.0 / sqrt((pow((p2.x - p0.x), 2) + pow((p2.y - p0.y), 2)));
-	ft_draw_line(data, p0, p1);
-	ft_draw_line(data, p0, p2);
-	ft_draw_line(data, p2, p1);
 	t = 0;
 	while (t <= 1)
 	{
-		tmp.y = p0.y + t * (p2.y - p0.y) - data->move_y;
-		tmp.x = p0.x + t * (p2.x - p0.x) - data->move_x;
+		tmp.y = p0.y + t * (p2.y - p0.y);
+		tmp.x = p0.x + t * (p2.x - p0.x);
 		tmp.color = parse_color(p0.color, p2.color, t);
 		ft_draw_line(data, p1, tmp);
 		t += k;
 	}
+	ft_draw_line(data, p0, p1);
+	ft_draw_line(data, p0, p2);
+	ft_draw_line(data, p2, p1);
 }
 
 void		ft_draw_polygon(t_mlx *data)
