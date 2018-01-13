@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 14:13:45 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/13 12:22:04 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/13 12:56:46 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		read_coordinate(int fd, char *av, t_mlx *data)
 		ft_memdel((void **)&line);
 		data->row++;
 	}
-	close(fd);
+	!data->row ? exit(ft_printf("No data found\n")) : close(fd);
 	data->arr = (t_coord **)ft_memalloc(sizeof(t_coord *) * (data->row + 1));
 	data->arr[data->row] = NULL;
 	(fd = open(av, O_RDONLY)) == -1 ? exit(ft_printf("No file %s\n", av)) : 0;
@@ -75,7 +75,9 @@ int			main(int ar, char **av)
 		exit(ft_printf("No file %s\n", av[1]));
 	data = (t_mlx){NULL, NULL, NULL, 0, 0, 0, NULL, 10, 0, 0, 0, 0, 0,
 			{-60, 50, 0}, {WIDTH / 2, HIGH / 2, 0, 0}, {0, 0, 0, 0}, NULL};
-	ar == 3 && !ft_strcmp(av[2], "-f") ? data.p = 1 : 0;
+	if (ar == 3)
+		!ft_strcmp(av[2], "-f") ?
+		data.p = 1 : exit(ft_printf("fdf: illegal option - %s", av[2]));
 	read_coordinate(fd, av[1], &data);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIDTH, HIGH, "FDF");
