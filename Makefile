@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+         #
+#    By: sergee <sergee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 11:17:10 by skushnir          #+#    #+#              #
-#    Updated: 2018/01/12 11:40:21 by skushnir         ###   ########.fr        #
+#    Updated: 2018/01/13 02:16:51 by sergee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC =  fdf.c read_coordinate.c draw_line.c
+SRC =  fdf.c read_coordinate.c draw_figure.c draw_polygon.c
 
 HDR = fdf.h minilibx/mlx.h
 

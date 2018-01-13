@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:04:48 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/12 14:19:41 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/13 02:28:15 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,16 @@ typedef struct	s_mlx
 	t_rot	rot;
 	t_coord	start;
 	t_coord	**arr;
+	int		p;
 }				t_mlx;
 
 void			read_coordinate(int fd, char *av, t_mlx *data);
 void			ft_draw_line(t_mlx *data, t_coord p0, t_coord p1);
+void			ft_draw_polygon(t_mlx *data);
 void			ft_draw_fdf(t_mlx *data);
 t_coord			ft_conversion_xyz(t_mlx *data, t_coord rot);
 int				key_action(int key, t_mlx *new);
 int				mouse_action(int button, int x, int y, t_mlx *data);
-int				rotation(t_mlx *data);
+unsigned int	parse_color(int c1, int c2, double t);
 int				close_window(t_mlx *data);
 #endif

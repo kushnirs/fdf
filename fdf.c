@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 14:13:45 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/12 15:39:11 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/13 02:32:25 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ int	mouse_action(int button, int x, int y, t_mlx *data)
 	y = 0;
 	button == M_UP ? data->size += data->size / 4 : 0;
 	button == M_DOWN ? data->size -= data->size / 4 : 0;
-	ft_draw_fdf(data);
+	data->p == 1 ? ft_draw_polygon(data) : ft_draw_fdf(data);
 	return (0);
 }
 
 int	key_action(int key, t_mlx *data)
 {
 	key == ESC ? exit(0) : 0;
-	key == UP ? data->move_y += -50 : 0;
-	key == DOWN ? data->move_y += 50 : 0;
-	key == RIGHT ? data->move_x += 50 : 0;
-	key == LEFT ? data->move_x += -50 : 0;
+	key == UP ? data->move_y += 50 : 0;
+	key == DOWN ? data->move_y += -50 : 0;
+	key == RIGHT ? data->move_x += -50 : 0;
+	key == LEFT ? data->move_x += 50 : 0;
 	key == B_A ? data->rot.ry -= 5 : 0;
 	key == B_W ? data->rot.rx -= 5 : 0;
 	key == B_Q ? data->rot.rz -= 5 : 0;
@@ -44,7 +44,7 @@ int	key_action(int key, t_mlx *data)
 	key == B_E ? data->rot.rz += 5 : 0;
 	key == B_PLUS ? data->size += data->size / 10 : 0;
 	key == B_MIN ? data->size -= data->size / 10 : 0;
-	ft_draw_fdf(data);
+	data->p == 1 ? ft_draw_polygon(data) : ft_draw_fdf(data);
 	return (0);
 }
 
@@ -53,19 +53,20 @@ int	main(int ar, char **av)
 	int		fd;
 	t_mlx	data;
 
-	ar != 2 ?
+	ar > 3 || ar == 1 ?
 	exit(write(1, "Usage : ./fdf <filename>[ case_size z_size ]\n", 46)) : 0;
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		exit(ft_printf("No file %s\n", av[1]));
 	data = (t_mlx){NULL, NULL, NULL, 0, 0, 0, NULL, 10, 0, 0, 0, 0,
-			{-60, 50, 0}, {0, 0, 0, 0}, NULL};
+			{-60, 50, 0}, {0, 0, 0, 0}, NULL, 0};
+	ar == 3 && !ft_strcmp(av[2], "-f") ? data.p = 1 : 0;
 	read_coordinate(fd, av[1], &data);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIDTH, HIGH, "fdf");
 	data.image = mlx_new_image(data.mlx, WIDTH, HIGH);
 	data.data_adr =
 	(t_ui *)mlx_get_data_addr(data.image, &data.bpp, &data.sl, &data.endian);
-	ft_draw_fdf(&data);
+	data.p == 1 ? ft_draw_polygon(&data) : ft_draw_fdf(&data);
 	mlx_mouse_hook(data.win, &mouse_action, &data);
 	mlx_key_hook(data.win, &key_action, &data);
 	mlx_hook(data.win, 17, 0, &close_window, &data);
