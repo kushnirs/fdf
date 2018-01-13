@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:04:48 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/13 03:30:01 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/13 12:15:50 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define B_MIN  78
 # define M_UP   5
 # define M_DOWN 4
+# define M_L	1
+# define M_R	2
 # define UP		126
 # define DOWN	125
 # define LEFT	123
@@ -66,10 +68,11 @@ typedef struct	s_mlx
 	int		column;
 	int		move_x;
 	int		move_y;
+	int		p;
 	t_rot	rot;
+	t_coord	centre;
 	t_coord	start;
 	t_coord	**arr;
-	int		p;
 }				t_mlx;
 
 void			read_coordinate(int fd, char *av, t_mlx *data);

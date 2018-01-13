@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 14:13:45 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/13 11:30:08 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/13 12:22:04 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ int			main(int ar, char **av)
 	exit(write(1, "Usage : ./fdf <filename>[ case_size z_size ]\n", 46)) : 0;
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		exit(ft_printf("No file %s\n", av[1]));
-	data = (t_mlx){NULL, NULL, NULL, 0, 0, 0, NULL, 10, 0, 0, 0, 0,
-			{-60, 50, 0}, {0, 0, 0, 0}, NULL, 0};
+	data = (t_mlx){NULL, NULL, NULL, 0, 0, 0, NULL, 10, 0, 0, 0, 0, 0,
+			{-60, 50, 0}, {WIDTH / 2, HIGH / 2, 0, 0}, {0, 0, 0, 0}, NULL};
 	ar == 3 && !ft_strcmp(av[2], "-f") ? data.p = 1 : 0;
 	read_coordinate(fd, av[1], &data);
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, WIDTH, HIGH, "fdf");
+	data.win = mlx_new_window(data.mlx, WIDTH, HIGH, "FDF");
 	data.image = mlx_new_image(data.mlx, WIDTH, HIGH);
 	data.data_adr =
 	(t_ui *)mlx_get_data_addr(data.image, &data.bpp, &data.sl, &data.endian);

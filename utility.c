@@ -6,7 +6,7 @@
 /*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 21:58:17 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/13 11:08:19 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/13 12:26:01 by skushnir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ int					close_window(t_mlx *data)
 
 int					mouse_action(int button, int x, int y, t_mlx *data)
 {
-	x = 0;
-	y = 0;
 	button == M_UP ? data->size += data->size / 4 : 0;
 	button == M_DOWN ? data->size -= data->size / 4 : 0;
+	button == M_L ? data->centre.x = x : 0;
+	button == M_L ? data->centre.y = y : 0;
+	button == M_R ? data->move_x = 0 : 0;
+	button == M_R ? data->move_y = 0 : 0;
+	button == M_R ? data->centre.x = WIDTH / 2 : 0;
+	button == M_R ? data->centre.y = HIGH / 2 : 0;
 	ft_draw_polygon(data);
 	return (0);
 }
@@ -81,8 +85,8 @@ t_coord				ft_conversion_xyz(t_mlx *data, t_coord rot)
 	p[1].x = p[0].x * func[2] + p[0].z * func[3];
 	p[1].y = p[0].y;
 	p[1].z = p[0].z * func[2] - p[0].x * func[3];
-	p[2].x = WIDTH / 2 + p[1].x * func[4] - p[1].y * func[5];
-	p[2].y = HIGH / 2 + p[1].x * func[5] + p[1].y * func[4];
+	p[2].x = data->centre.x + p[1].x * func[4] - p[1].y * func[5];
+	p[2].y = data->centre.y + p[1].x * func[5] + p[1].y * func[4];
 	p[2].z = p[1].z;
 	p[2].color = rot.color;
 	return (p[2]);
