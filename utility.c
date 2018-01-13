@@ -1,16 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_figure.c                                      :+:      :+:    :+:   */
+/*   utility.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 21:58:17 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/13 02:15:45 by sergee           ###   ########.fr       */
+/*   Updated: 2018/01/13 03:16:20 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int	close_window(t_mlx *data)
+{
+	data = NULL;
+	exit(0);
+	return (0);
+}
+
+int	mouse_action(int button, int x, int y, t_mlx *data)
+{
+	x = 0;
+	y = 0;
+	button == M_UP ? data->size += data->size / 4 : 0;
+	button == M_DOWN ? data->size -= data->size / 4 : 0;
+	ft_draw_polygon(data);
+	return (0);
+}
+
+int	key_action(int key, t_mlx *data)
+{
+	key == ESC ? exit(0) : 0;
+	key == UP ? data->move_y += 50 : 0;
+	key == DOWN ? data->move_y += -50 : 0;
+	key == RIGHT ? data->move_x += -50 : 0;
+	key == LEFT ? data->move_x += 50 : 0;
+	key == B_A ? data->rot.ry -= 5 : 0;
+	key == B_W ? data->rot.rx -= 5 : 0;
+	key == B_Q ? data->rot.rz -= 5 : 0;
+	key == B_D ? data->rot.ry += 5 : 0;
+	key == B_S ? data->rot.rx += 5 : 0;
+	key == B_E ? data->rot.rz += 5 : 0;
+	key == B_PLUS ? data->size += data->size / 10 : 0;
+	key == B_MIN ? data->size -= data->size / 10 : 0;
+	ft_draw_polygon(data);
+	return (0);
+}
 
 unsigned int		parse_color(int c1, int c2, double t)
 {
@@ -23,53 +59,6 @@ unsigned int		parse_color(int c1, int c2, double t)
 	dg = (1 - t) * (double)(c1 / 0x100 % 256) + t * (double)(c2 / 0x100 % 256);
 	db = (1 - t) * (double)(c1 % 256) + t * (double)(c2 % 256);
 	return (dr * 0x10000 + dg * 0x100 + db);
-}
-
-void				ft_draw_line(t_mlx *data, t_coord p0, t_coord p1)
-{
-	double	t;
-	double	k;
-	double	n_x;
-	double	n_y;
-
-	k = 1.0 / sqrt((pow((p1.x - p0.x), 2) + pow((p1.y - p0.y), 2)));
-	t = 0;
-	while (t <= 1)
-	{
-		n_y = p0.y + t * (p1.y - p0.y) - data->move_y;
-		n_x = p0.x + t * (p1.x - p0.x) - data->move_x;
-		if (n_x >= 0 && n_x <= WIDTH && n_y >= 0 && n_y <= HIGH)
-			data->data_adr[(int)n_x + (int)n_y * data->sl / 4] =
-				parse_color(p0.color, p1.color, t);
-		t += k;
-	}
-}
-
-void				ft_draw_fdf(t_mlx *data)
-{
-	int		x;
-	int		y;
-	t_coord **arr;
-
-	ft_bzero(data->data_adr, HIGH * data->sl);
-	data->start.x = data->column / 2 * (-data->size);
-	data->start.y = data->row / 2 * (-data->size);
-	arr = data->arr;
-	x = -1;
-	while (++x < data->row)
-	{
-		y = -1;
-		while (++y < data->column)
-		{
-			if (y + 1 < data->column)
-				ft_draw_line(data, ft_conversion_xyz(data, arr[x][y]),
-					ft_conversion_xyz(data, arr[x][y + 1]));
-			if (x + 1 < data->row)
-				ft_draw_line(data, ft_conversion_xyz(data, arr[x][y]),
-					ft_conversion_xyz(data, arr[x + 1][y]));
-		}
-	}
-	mlx_put_image_to_window(data->mlx, data->win, data->image, 0, 0);
 }
 
 t_coord				ft_conversion_xyz(t_mlx *data, t_coord rot)
