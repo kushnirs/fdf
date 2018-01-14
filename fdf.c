@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 14:13:45 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/13 12:56:46 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/15 00:19:41 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			main(int ar, char **av)
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		exit(ft_printf("No file %s\n", av[1]));
 	data = (t_mlx){NULL, NULL, NULL, 0, 0, 0, NULL, 10, 0, 0, 0, 0, 0,
-			{-60, 50, 0}, {WIDTH / 2, HIGH / 2, 0, 0}, {0, 0, 0, 0}, NULL};
+			{-60, 50, 0}, {WIDTH / 2, HIGH / 2, 0, 0}, {0, 0, 0, 0}, 0, 0};
 	if (ar == 3)
 		!ft_strcmp(av[2], "-f") ?
 		data.p = 1 : exit(ft_printf("fdf: illegal option - %s", av[2]));
@@ -84,6 +84,7 @@ int			main(int ar, char **av)
 	data.image = mlx_new_image(data.mlx, WIDTH, HIGH);
 	data.data_adr =
 	(t_ui *)mlx_get_data_addr(data.image, &data.bpp, &data.sl, &data.endian);
+	data.z_buff = (t_coord *)ft_memalloc(sizeof(t_coord) * HIGH * WIDTH);
 	ft_draw_polygon(&data);
 	mlx_mouse_hook(data.win, &mouse_action, &data);
 	mlx_key_hook(data.win, &key_action, &data);

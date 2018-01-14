@@ -3,31 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   draw_polygon.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 02:11:20 by sergee            #+#    #+#             */
-/*   Updated: 2018/01/13 12:21:04 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/15 01:34:54 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+static void	*z_buff(t_mlx *data)
+{
+	int i;
+
+	i = -1;
+	while (++i < HIGH * WIDTH)
+		data->data_adr[i] =	data->z_buff[i].color;
+	ft_bzero(data->z_buff, HIGH * WIDTH * sizeof(t_coord));
+	return (data->image);
+}
+
 static void	ft_draw_line(t_mlx *data, t_coord p0, t_coord p1)
 {
-	double	t;
-	double	k;
-	double	n_x;
-	double	n_y;
+	double		t;
+	double		k;
+	t_coord		new;
 
 	k = 1.0 / sqrt((pow((p1.x - p0.x), 2) + pow((p1.y - p0.y), 2)));
 	t = 0;
 	while (t <= 1)
 	{
-		n_y = p0.y + t * (p1.y - p0.y) - data->move_y;
-		n_x = p0.x + t * (p1.x - p0.x) - data->move_x;
-		if (n_x >= 0 && n_x <= WIDTH && n_y >= 0 && n_y <= HIGH)
-			data->data_adr[(int)n_x + (int)n_y * data->sl / 4] =
-				parse_color(p0.color, p1.color, t);
+		new.y = p0.y + t * (p1.y - p0.y) - data->move_y;
+		new.x = p0.x + t * (p1.x - p0.x) - data->move_x;
+		new.z = p0.z + t * (p1.z - p0.z);
+		if (new.x >= 0 && new.x <= WIDTH && new.y >= 0 && new.y <= HIGH
+			&& (!data->z_buff[(int)new.x + (int)new.y * WIDTH].color
+				|| new.z > data->z_buff[(int)new.x + (int)new.y * WIDTH].z))
+		{
+			data->z_buff[(int)new.x + (int)new.y * WIDTH].z = new.z;
+			data->z_buff[(int)new.x + (int)new.y * WIDTH].color =
+			parse_color(p0.color, p1.color, t);
+		}
 		t += k;
 	}
 }
@@ -95,5 +111,5 @@ void		ft_draw_polygon(t_mlx *data)
 				ft_conversion_xyz(data, arr[x + 1][y]));
 		}
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->image, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, z_buff(data), 0, 0);
 }

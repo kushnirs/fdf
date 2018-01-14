@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+         #
+#    By: sergee <sergee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/09 11:17:10 by skushnir          #+#    #+#              #
-#    Updated: 2018/01/13 11:21:16 by skushnir         ###   ########.fr        #
+#    Updated: 2018/01/15 01:02:53 by sergee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC =  fdf.c utility.c draw_polygon.c
+SRC =  fdf.c utility.c draw_polygon.c z_buff.c
 
 HDR = fdf.h
 

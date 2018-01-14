@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skushnir <skushnir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sergee <sergee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:04:48 by skushnir          #+#    #+#             */
-/*   Updated: 2018/01/13 12:15:50 by skushnir         ###   ########.fr       */
+/*   Updated: 2018/01/15 01:02:38 by sergee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct	s_mlx
 	t_coord	centre;
 	t_coord	start;
 	t_coord	**arr;
+	t_coord *z_buff;
 }				t_mlx;
 
 void			read_coordinate(int fd, char *av, t_mlx *data);
@@ -82,4 +83,5 @@ int				key_action(int key, t_mlx *new);
 int				mouse_action(int button, int x, int y, t_mlx *data);
 unsigned int	parse_color(int c1, int c2, double t);
 int				close_window(t_mlx *data);
+
 #endif
